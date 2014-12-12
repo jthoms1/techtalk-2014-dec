@@ -1,0 +1,18 @@
+{
+  "author": "Josh Thomas",
+  "name": "tech-talk-demo",
+  "description": "Web demo for Earthling tech talk December 2014",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jthoms1/techtalk-2014-dec",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jthoms1/techtalk-2014-dec.git"
+  },
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "throng": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node server"
+  }
+}

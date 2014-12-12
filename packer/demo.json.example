@@ -1,0 +1,13 @@
+{
+  "builders": [{
+    "type": "digitalocean",
+    "api_key": "YOUR API KEY",
+    "client_id": "YOUR CLIENT ID",
+    "droplet_name": "packer-tech-talk-14-dec",
+    "image": "ubuntu-12-04-x64",
+    "private_networking": false,
+    "region": "nyc3",
+    "size": "512mb",
+    "snapshot_name": "packer-tech-talk"
+  }]
+}
