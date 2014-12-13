@@ -4,6 +4,7 @@ application_name="earthlings"
 postgres_password="CHOOSE A SECURE DB PASSWORD"
 safeuser_username="safeuser"
 safeuser_password="CHOOSE A SECURE USER PASSWORD"
+source_dir="/home/$safeuser_username/$application_name"
 
 pwd
 
@@ -67,16 +68,19 @@ sudo service postgresql restart > /dev/null
 echo "Configuring Nginx"
 sudo cp /vagrant/provision/config/demo.conf /etc/nginx/sites-available/demo.conf > /dev/null
 sudo ln -s /etc/nginx/sites-available/demo.conf /etc/nginx/sites-enabled/
-
 sudo rm -rf /etc/nginx/sites-available/default
-
 
 # Restart Nginx for the config to take effect
 sudo service nginx restart > /dev/null
 
+
+# Checkout the code to this machine.
+git clone git@github.com:jthoms1/techtalk-2014-dec.git $source_dir
+
+
 # Node App Configuration
 echo "Configuring and starting Node app."
-sudo -H -u $safeuser_username bash -c 'pm2 start /vagrant/server.js --name "$application_name" -i 0'
+sudo -H -u $safeuser_username bash -c 'pm2 start $source_dir/app/server.js --name "$application_name" -i 0'
 sudo pm2 startup ubuntu -u $safeuser_username
 sudo -H -u $safeuser_username bash -c 'pm2 save'
 
