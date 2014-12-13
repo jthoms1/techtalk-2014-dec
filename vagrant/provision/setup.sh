@@ -1,9 +1,17 @@
 #!/bin/bash
 
-postgres_password="REJ#%*OfdaklJ*O4t5eH"
+postgres_password="CHOOSE A SECURE DB PASSWORD"
+safeuser_username="safeuser"
+safeuser_password="CHOOSE A SECURE USER PASSWORD"
 
 echo "Provisioning virtual machine..."
 sudo apt-get update -y > /dev/null
+
+# Create a safe user with a home director
+echo "Add safe user"
+useradd -s /bin/bash -m -d /home/$safeuser_username -c "safe user" $safeuser_username
+echo "$safeuser_username:$safeuser_password" | chpasswd # give the user the specified password
+usermod -aG sudo $safeuser_username # Add safe user to the sudo group
 
 # Git
 echo "Installing Git and Curl"
@@ -22,6 +30,11 @@ curl -sL https://deb.nodesource.com/setup | sudo bash - > /dev/null
 sudo apt-get install nodejs -y > /dev/null
 
 
+# Dependent global npm installs
+echo "Installing pm2"
+sudo npm install -g pm2
+
+
 # Postgres 9.3
 echo "Installing Postgres"
 # Add the official postgres repo
@@ -33,6 +46,9 @@ sudo apt-get update -y > /dev/null
 # Get the packages
 sudo apt-get install postgresql-9.3 libpq-dev postgresql-server-dev-9.3 -y > /dev/null
 
+
+# Postgres Configuration
+echo "Configuring Postgres"
 # Set the password to the config value
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password '$postgres_password';" > /dev/null
 
@@ -57,3 +73,5 @@ sudo service nginx restart > /dev/null
 
 echo "Finished provisioning."
 
+#echo "Starting up app."
+#pm2 start server.js
