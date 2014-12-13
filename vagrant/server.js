@@ -1,15 +1,11 @@
 var http = require('http');
 var cpus = require('os').cpus().length;
-var throng = require('throng');
 
 http.globalAgent.maxSockets = Infinity;
 
 var PORT = process.env.PORT || 3000;
 
-throng(start, {
-  workers: cpus * 2,
-  lifetime: Infinity
-});
+start();
 
 function start() {
   console.log('Server listening to port ' + PORT);
@@ -23,15 +19,10 @@ function start() {
     res.end('Hello Earthlings!\n');
   });
   server.listen(PORT);
+}
 
-  function exit(reason) {
-    console.log('Server closing' + reason);
-
-    if (server)  {
-      server.close(process.exit.bind(process));
-    } else {
-      process.exit();
-    }
-  }
+function exit(reason) {
+  console.log('Server closing' + reason);
+  process.exit();
 }
 

@@ -1,8 +1,11 @@
 #!/bin/bash
 
+application_name="earthlings"
 postgres_password="CHOOSE A SECURE DB PASSWORD"
 safeuser_username="safeuser"
 safeuser_password="CHOOSE A SECURE USER PASSWORD"
+
+pwd
 
 echo "Provisioning virtual machine..."
 sudo apt-get update -y > /dev/null
@@ -71,7 +74,11 @@ sudo rm -rf /etc/nginx/sites-available/default
 # Restart Nginx for the config to take effect
 sudo service nginx restart > /dev/null
 
+# Node App Configuration
+echo "Configuring and starting Node app."
+sudo -H -u $safeuser_username bash -c 'pm2 start /vagrant/server.js --name "$application_name" -i 0'
+sudo pm2 startup ubuntu -u $safeuser_username
+sudo -H -u $safeuser_username bash -c 'pm2 save'
+
 echo "Finished provisioning."
 
-#echo "Starting up app."
-#pm2 start server.js

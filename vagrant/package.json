@@ -9,8 +9,7 @@
     "url": "git@github.com:jthoms1/techtalk-2014-dec.git"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
-    "throng": "^1.0.0"
+    "chalk": "^0.5.1"
   },
   "scripts": {
     "start": "node server"
