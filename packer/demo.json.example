@@ -1,7 +1,7 @@
 {
   "builders": [{
     "type": "digitalocean",
-    "api_token": "YOUR TOKEN HERE",
+    "api_token": "PUT YOUR TOKEN HERE",
     "droplet_name": "packer-tech-talk-14-dec",
     "image": "ubuntu-12-04-x64",
     "private_networking": false,
@@ -9,8 +9,8 @@
     "size": "512mb",
     "snapshot_name": "packer-tech-talk {{timestamp}}"
   }],
-  provisioners: [{
+  "provisioners": [{
     "type": "shell",
-    "script": "provisioner/setup.sh"
+    "script": "provision/setup.sh"
   }]
 }
