@@ -5,11 +5,12 @@ postgres_password="CHOOSE A SECURE DB PASSWORD"
 safeuser_username="safeuser"
 safeuser_password="CHOOSE A SECURE USER PASSWORD"
 source_dir="/home/$safeuser_username/$application_name"
+source_repo="https://github.com/jthoms1/techtalk-2014-dec.git"
 
-pwd
 
 echo "Provisioning virtual machine..."
 sudo apt-get update -y > /dev/null
+
 
 # Create a safe user with a home director
 echo "Add safe user"
@@ -17,10 +18,14 @@ useradd -s /bin/bash -m -d /home/$safeuser_username -c "safe user" $safeuser_use
 echo "$safeuser_username:$safeuser_password" | chpasswd # give the user the specified password
 usermod -aG sudo $safeuser_username # Add safe user to the sudo group
 
+
 # Git
 echo "Installing Git and Curl"
 sudo apt-get install git curl -y > /dev/null
 
+echo "Pulling code to local safe user : $source_dir"
+sudo git clone $source_repo $source_dir
+sudo chown -R $safeuser_username:$safeuser_username $source_dir
 
 # Nginx
 echo "Installing Nginx"
@@ -66,23 +71,18 @@ sudo service postgresql restart > /dev/null
 
 # Nginx Configuration
 echo "Configuring Nginx"
-sudo cp /vagrant/provision/config/demo.conf /etc/nginx/sites-available/demo.conf > /dev/null
+sudo cp $source_dir/provision_config/demo.conf /etc/nginx/sites-available/demo.conf > /dev/null
 sudo ln -s /etc/nginx/sites-available/demo.conf /etc/nginx/sites-enabled/
 sudo rm -rf /etc/nginx/sites-available/default
 
 # Restart Nginx for the config to take effect
 sudo service nginx restart > /dev/null
 
-
-# Checkout the code to this machine.
-git clone git@github.com:jthoms1/techtalk-2014-dec.git $source_dir
-
-
 # Node App Configuration
 echo "Configuring and starting Node app."
-sudo -H -u $safeuser_username bash -c 'pm2 start $source_dir/app/server.js --name "$application_name" -i 0'
+sudo -H -u $safeuser_username bash -c "pm2 start $source_dir/app/server.js --name \"$application_name\" -i 0"
 sudo pm2 startup ubuntu -u $safeuser_username
-sudo -H -u $safeuser_username bash -c 'pm2 save'
+sudo -H -u $safeuser_username bash -c "pm2 save"
 
 echo "Finished provisioning."
 
