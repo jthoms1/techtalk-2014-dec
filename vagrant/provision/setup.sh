@@ -11,15 +11,18 @@ source_repo="https://github.com/jthoms1/techtalk-2014-dec.git"
 echo "Provisioning virtual machine..."
 sudo apt-get update -y > /dev/null
 
-
+# --------------------------------------------------
 # Create a safe user with a home director
+# --------------------------------------------------
 echo "Add safe user"
 useradd -s /bin/bash -m -d /home/$safeuser_username -c "safe user" $safeuser_username
 echo "$safeuser_username:$safeuser_password" | chpasswd # give the user the specified password
 usermod -aG sudo $safeuser_username # Add safe user to the sudo group
 
 
-# Git
+# --------------------------------------------------
+# Git and Curl
+# --------------------------------------------------
 echo "Installing Git and Curl"
 sudo apt-get install git curl -y > /dev/null
 
@@ -27,17 +30,21 @@ echo "Pulling code to local safe user : $source_dir"
 sudo git clone $source_repo $source_dir
 sudo chown -R $safeuser_username:$safeuser_username $source_dir
 
-# Nginx
+
+# --------------------------------------------------
+# Install Nginx
+# --------------------------------------------------
 echo "Installing Nginx"
 sudo apt-get install nginx -y > /dev/null
 
 
+# --------------------------------------------------
 # Node
+# --------------------------------------------------
 echo "Installing Node"
 # Add the official node repo
 curl -sL https://deb.nodesource.com/setup | sudo bash - > /dev/null
 sudo apt-get install nodejs -y > /dev/null
-
 
 # Dependent global npm installs
 echo "Installing pm2"
@@ -45,7 +52,7 @@ sudo npm install -g pm2
 
 
 # --------------------------------------------------
-# Postgres 9.3
+# Install Postgres 9.3
 # --------------------------------------------------
 echo "Installing Postgres"
 # Add the official postgres repo
@@ -89,6 +96,7 @@ echo "Configuring and starting Node app."
 sudo -H -u $safeuser_username bash -c "pm2 start $source_dir/app/server.js --name \"$application_name\" -i 0"
 sudo pm2 startup ubuntu -u $safeuser_username
 sudo -H -u $safeuser_username bash -c "pm2 save"
+
 
 echo "Finished provisioning."
 
