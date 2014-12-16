@@ -79,7 +79,7 @@ sudo rm -rf /etc/nginx/sites-available/default
 sudo service nginx restart > /dev/null
 
 # Node App Configuration
-echo "Configuring and starting Node app."
+#echo "Configuring and starting Node app."
 #sudo -H -u $safeuser_username bash -c "pm2 start $source_dir/app/server.js --name \"$application_name\" -i 0"
 #sudo pm2 startup ubuntu -u $safeuser_username
 #sudo -H -u $safeuser_username bash -c "pm2 save"
