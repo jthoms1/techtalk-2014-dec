@@ -11,6 +11,8 @@ RUN curl -sL https://deb.nodesource.com/setup | bash - > /dev/null
 RUN apt-get install nodejs -y > /dev/null
 
 ADD supervisor.conf /etc/supervisor/conf.d/supervisor.conf
+
 EXPOSE 3000
+
 CMD "/usr/bin/supervisord"
 
