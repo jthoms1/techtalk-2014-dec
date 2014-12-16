@@ -4,7 +4,9 @@ RUN apt-get update -y && apt-get install git supervisor curl build-essential -y 
 RUN mkdir -p /var/log/supervisor
 RUN mkdir -p /data
 RUN mkdir -p /logs
-RUN cd /opt && git clone https://github.com/jthoms1/Nodevember.git
+
+RUN cd /opt && git clone https://github.com/jthoms1/techtalk-2014-dec.git
+
 RUN curl -sL https://deb.nodesource.com/setup | bash - > /dev/null
 RUN apt-get install nodejs -y > /dev/null
 

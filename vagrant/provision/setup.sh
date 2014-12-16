@@ -44,7 +44,9 @@ echo "Installing pm2"
 sudo npm install -g pm2
 
 
+# --------------------------------------------------
 # Postgres 9.3
+# --------------------------------------------------
 echo "Installing Postgres"
 # Add the official postgres repo
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - > /dev/null
@@ -54,7 +56,6 @@ sudo apt-get update -y > /dev/null
 
 # Get the packages
 sudo apt-get install postgresql-9.3 libpq-dev postgresql-server-dev-9.3 -y > /dev/null
-
 
 # Postgres Configuration
 echo "Configuring Postgres"
@@ -69,7 +70,9 @@ sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/po
 sudo service postgresql restart > /dev/null
 
 
+# --------------------------------------------------
 # Nginx Configuration
+# --------------------------------------------------
 echo "Configuring Nginx"
 sudo cp $source_dir/provision_config/demo.conf /etc/nginx/sites-available/demo.conf > /dev/null
 sudo ln -s /etc/nginx/sites-available/demo.conf /etc/nginx/sites-enabled/
@@ -78,7 +81,10 @@ sudo rm -rf /etc/nginx/sites-available/default
 # Restart Nginx for the config to take effect
 sudo service nginx restart > /dev/null
 
+
+# --------------------------------------------------
 # Node App Configuration
+# --------------------------------------------------
 echo "Configuring and starting Node app."
 sudo -H -u $safeuser_username bash -c "pm2 start $source_dir/app/server.js --name \"$application_name\" -i 0"
 sudo pm2 startup ubuntu -u $safeuser_username
