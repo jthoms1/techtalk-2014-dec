@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Earthling Interactive - Dec. Tech Talk</title>
+        <meta name="description" content="An easy to use CSS 3D slideshow tool for quickly creating good looking HTML presentations.">
+        <meta name="author" content="Hakim El Hattab">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+        <style>
+        .reveal section img.nostyle {
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
+        .reveal pre code {
+            max-height: 100%;
+        }
+        .watermark {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .watermark.right {
+          left: auto;
+          right: 0;
+        }
+        </style>
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+    </head>
+    <body>
+        <div class="reveal">
+
+            <!-- Used to fade in a background when a specific slide state is reached -->
+            <div class="state-background"></div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+              <section>
+                <h2>Packer and Docker</h2>
+                <p>
+                  <small>Josh Thomas / <a href="http://twitter.com/jthoms1">@jthoms1</a></small>
+                </p>
+                <br>
+                <blockquote class="fragment fade-in" style="height: 110px">
+                  <img height="100%" class="fragment fade-in nostyle" style="margin: 0 0 0 10px; background: #FFF; float: right" src="img/troll.svg"/>
+                  Notice: When I say OS, I mean Linux.
+                  Windows is not suitable for Server use.
+                </blockquote>
+              </section>
+              <section>
+                <h3>Virtual Machines</h3>
+                <br>
+                <img height="300px" style="float: left;" src="img/virtual-machines.png"/>
+                <ul style="float: right; width: 600px">
+                  <li class="fragment">Emulated Hardware on Host OS</li>
+                  <li class="fragment fade-in">Replacement for bare metal</li>
+                  <li class="fragment fade-in">Common and accommodating<br><br></li>
+                  <li class="fragment fade-in">Large memory and storage footprint<br></li>
+                  <li class="fragment fade-in">JIT is relative</li>
+                </ul>
+              </section>
+              <section>
+                <img height="300px" class="nostyle" src="img/logo_vagrant.png"/>
+                <br>
+                <br>
+                <ul>
+                  <li class="fragment fade-in">Development environments made easy</li>
+                  <li class="fragment fade-in">Software for creating and configuring VMs</li>
+                  <li class="fragment fade-in">Works on Mac, Windows, and Linux</li>
+                  <li class="fragment fade-in">Local environment closely matches Prod</li>
+                </ul>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_vagrant.png"/>
+                <h3>How has it helped Earthlings?</h3>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_vagrant.png"/>
+                <h3><a href="https://github.com/jthoms1/techtalk-2014-dec/blob/master/vagrant/Vagrantfile">Live Demo</a></h3>
+                <img height="50px" class="nostyle watermark right" src="img/crossbones.svg"/>
+              </section>
+              <section>
+                <img height="300px" class="nostyle" src="img/logo_packer.png"/>
+                <br>
+                <br>
+                <ul>
+                  <li class="fragment fade-in">Cloud images made easy</li>
+                  <li class="fragment fade-in">Identical machine images for multiple platforms</li>
+                  <li class="fragment fade-in">Provisions similar to Vagrant</li>
+                  <li class="fragment fade-in">Create exactly the same dev server and prod server</li>
+                </ul>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_packer.png"/>
+                <h3>How can it help an Earthling?</h3>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_packer.png"/>
+                <h3><a href="https://cloud.digitalocean.com/droplets">Live Demo</a></h3>
+                <img height="50px" class="nostyle watermark right" src="img/crossbones.svg"/>
+              </section>
+              <section>
+                <img height="300px" class="nostyle" src="img/logo_docker.png"/>
+                <br>
+                <br>
+                <ul>
+                  <li class="fragment fade-in">Linux container used for Applications</li>
+                  <li class="fragment fade-in">Virtualizes without an independent OS Kernel</li>
+                  <li class="fragment fade-in">Isolates application from the rest of the OS <br>( port forwarding + dir sharing)</li>
+                  <li class="fragment fade-in">Highly efficient</li>
+                </ul>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_docker.png"/>
+                <h3>How does Docker work?</h3>
+                <br>
+                <img height="300px" style="float: left;" src="img/docker-containers.png"/>
+                <ul style="float: right; width: 500px">
+                  <li class="fragment">Linux containers (est 2008)</li>
+                  <li class="fragment fade-in">Images are layered</li>
+                  <li class="fragment fade-in">Small memory and storage footprint</li>
+                  <li class="fragment fade-in">Uptime in ms<br><br></li>
+                  <li class="fragment fade-in">Currently not common but insane growth</li>
+                  <li class="fragment fade-in">Rapidly changing environment</li>
+                </ul>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_docker.png"/>
+                <h3>What are the <a href="https://registry.hub.docker.com/">advantages</a>?</h3>
+              </section>
+              <section>
+                <img height="75px" class="nostyle watermark" src="img/logo_docker.png"/>
+                <h3><a href="https://github.com/jthoms1/techtalk-2014-dec/blob/master/docker/node_app/Dockerfile">Live Demo</a></h3>
+                <img height="50px" class="nostyle watermark right"src="img/crossbones.svg"/>
+              </section>
+              <section>
+                <h3>Questions?</h3>
+              </section>
+            </div>
+
+            <!-- The navigational controls UI -->
+            <aside class="controls">
+                <a class="left" href="#">&#x25C4;</a>
+                <a class="right" href="#">&#x25BA;</a>
+                <a class="up" href="#">&#x25B2;</a>
+                <a class="down" href="#">&#x25BC;</a>
+            </aside>
+
+            <!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+            <div class="progress"><span></span></div>
+        </div>
+
+        <!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+        <script src="lib/js/highlight.js"></script>
+        <script src="lib/js/classList.js"></script>
+        <script src="js/reveal.js"></script>
+        <script>
+
+            // Fires each time a new slide is activated
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+            });
+
+            Reveal.initialize({
+                // Display controls in the bottom right corner
+                controls: false,
+
+                // Display a presentation progress bar
+                progress: true,
+
+                // If true; each slide will be pushed to the browser history
+                history: true,
+
+                // Loops the presentation, defaults to false
+                loop: false,
+
+                // Flags if mouse wheel navigation should be enabled
+                mouseWheel: false,
+
+                // Apply a 3D roll to links on hover
+                rollingLinks: true,
+
+                // UI style
+                theme: 'night', // default/neon
+
+                // Transition style
+                transition: 'linear' // default/cube/page/concave/linear(2d)
+            });
+
+            hljs.initHighlightingOnLoad();
+        </script>
+    </body>
+</html>
